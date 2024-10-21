@@ -23,15 +23,15 @@
       <div class="obaasanimg">
         <img src="/assets/img/obaasan_agura.png" alt="あぐらのおばあさんイメージ">
         <div class="midleDisplay">
-          <div class="medal" id="medalTitle">メダル数：</div>
+          <div class="medal" id="medalTitle">手元メダル数：</div>
           <div class="medalnum" id="medalnum">0</div>
         </div>
         <div class="midleDisplay">
           <div class="medal" id="medalTitle">
-            <span>預かってもらった</span><br>
+            <span>預け入れ</span><br>
             <span>メダル数：</span>
           </div>
-          <div class="medalnum" id="cookiemedalnum">0</div>
+          <div class="medalnum" id="longmedalnum">0</div>
         </div>
       </div>
       <div class="talkbox">
@@ -45,15 +45,15 @@
           <div class="buymedal">
             <div class="insert">
               <div class="medal">メダルを購入する</div>
-              <button id="tenYenInsert" class="coinbton">10円投入</button>
-              <button id="hundredYenInsert" class="coinbton">100円投入</button>
+              <button id="tenYenInsert" class="coinbtn">10円投入</button>
+              <button id="hundredYenInsert" class="coinbtn">100円投入</button>
             </div>
           </div>
           <div class="withdrawmedal">
-            <div class="medal">メダルを受け取る</div>
+            <div class="medal">メダルを預ける／受け取る</div>
             <div class="medalbtn">
-              <button id="medalSet" class="coinbton">メダルを預ける</button>
-              <button id="medalGet" class="coinbton">メダルを受け取る</button>
+              <button id="medalSet" class="coinbtn">メダルを預ける</button>
+              <button id="medalGet" class="coinbtn">メダルを受け取る</button>
             </div>
           </div>
         </div>
@@ -63,5 +63,9 @@
 
     
   </main>
+  <script src="js/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- 授業での指定はHTMLへ直接記載するとのことだったが、コード数が大きくなったためjs/main.jsファイルへ分離  2024/10/19 -->
+<script src="js/01_counter.js"></script>
 </body>
 </html>

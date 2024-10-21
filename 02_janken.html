@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/02_janken.css">
 
 
 <title>じゃんけん</title>
@@ -25,24 +25,32 @@
 
 <header>
   <h1>じゃんけん</h1>
+  <div class="midleDisplay">
+    <div class="yenbtn" id="medalTitle">メダル数：</div>
+    <div class="yenbtn" id="medalnum"></div>
+  </div>
+  <div class="update">
+    <button id="medalupdate" class="updatebtn">更新</button>
+  </div>
 </header>
 <main class="mainarea">
   <section class="insertCoin">
     <div class="midleDisplay">
-      <div class="insert">
+      <!-- <div class="insert">
         <button id="tenYenInsert">10円投入</button>
         <button id="hundredYenInsert">100円投入</button>
-      </div>
-      <div class="midleDisplay">
+      </div> -->
+      <!-- <div class="midleDisplay">
         <div class="yenbtn" id="medalTitle">メダル数：</div>
         <div class="yenbtn" id="medalnum"></div>
-      </div>
-      <div class="midleDisplay">
+      </div> -->
+      <!-- <div class="midleDisplay">
         <button id="medalSet">メダルを持ち帰る</button>
         <button id="medalGet">メダルを使う</button>
-      </div>
+      </div> -->
     </div>
   </section>
+
   <section class="multierea">
     <div class="multibox">
       <ul id="multidisplay">
@@ -59,7 +67,14 @@
   <section class="result">
     <h2><div id="judgment"></div></h2> 
   </section>
-
+  <section class="toggleerea">
+    <div class="switchtitle">♫</div>
+    <div class="switchArea">
+      <input type="checkbox" id="switch1">
+      <label for="switch1"><span></span></label>
+      <div id="swImg"></div>
+    </div>
+  </section>
   <p class="pccomment"></p>
   <div id="junkenDisplay">
     <div id="pc_hands"></div>
@@ -87,7 +102,7 @@
   </div>
 
 </footer>
-<script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/jquery-3.7.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <!-- 授業での指定はHTMLへ直接記載するとのことだったが、コード数が大きくなったためjs/main.jsファイルへ分離  2024/10/19 -->
 <script src="js/main.js"></script>

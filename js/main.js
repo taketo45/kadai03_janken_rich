@@ -78,6 +78,8 @@ const $multi16 = $("#multi16");
 const $multi32 = $("#multi32");
 const $multiAll = $(".multi");
 const $medalnum = $("#medalnum");
+const $audioswitch = $("#switch1");
+const $medalupdate = $("#medalupdate");
 const $tenYenInsert = $("#tenYenInsert");
 const $hundredYenInsert = $("#hundredYenInsert");
 const $medalSet = $("#medalSet");
@@ -85,9 +87,14 @@ const $medalGet = $("#medalGet");
 const $document = $(document);
 let $sound = $(".sound");
 const $body = $("body");
+const $window = $(window);
 const BG_IMG = 'background-image';
 const BG_COLOR = "background-color";
-const COOKIE_NAME = '01_guy_janken';
+const COOKIE_NAME = '01_guy_dagashi_games_byhands';
+
+$window.on('load',()=>{
+  updateMedalInfo();
+});
 
 $document.ready(function() {
   initializeGame();
@@ -110,8 +117,16 @@ function attachEnevntListners(){
   $paBtn.on("click",()=>{jankenGame(HANDS.PA)});
   $tenYenInsert.on("click", () => insertCoins(1));
   $hundredYenInsert.on("click", () => insertCoins(10));
-  $medalSet.on("click", setMedalCookie);
+  $medalSet.on("click", ()=> setMedalCookie(gameStatus.medal));
   $medalGet.on("click", getMedalFromCookie);
+  $medalupdate.on("click", updateMedalInfo);
+  if($audioswitch.prop("checked") == true) {
+    gameStatus.isSoundOK = true;
+    console.log('isSoundOK'+gameStatus.isSoundOK);
+  } else {
+    gameStatus.isSoundOK = false;
+    console.log('isSoundOK'+gameStatus.isSoundOK);
+  }
 
   $document.keydown(handleKeyPress);
 }
@@ -121,19 +136,29 @@ function insertCoins(num) {
   medalPayment(num);
 }
 
-function setMedalCookie(){
-  if(gameStatus.isGaming) return;
-  setCookie();
-  gameStatus.medal = 0;
+function setMedalCookie(medal){
+  // if(gameStatus.isGaming) return;
+  console.log('setMedalCookie(medal)'+medal);
+  setCookie(medal);
+  // gameStatus.medal = 0;
   updateMedalInfo();
 }
 
 function getMedalFromCookie(){
-  if(gameStatus.isGaming) return;
-  gameStatus.medal += getCookie()||0;
-  deleteGookie();
-  updateMedalInfo();
+  // if(gameStatus.isGaming) return;
+  // gameStatus.medal += getCookie()||0;
+  // deleteGookie();
+  const cookieResult = getCookie();
+  if(!cookieResult) return 0;
+  
+  gameStatus.medal = cookieResult;
+  return cookieResult;
+  // updateMedalInfo();
 }
+
+// function getMedalCookie(){
+//   return getCookie()||0;
+// }
 
 function handleKeyPress(e){
   const keyHandlers = {
@@ -171,10 +196,10 @@ function playSound(sound) {
 }
 
 function animateBtn($btn) {
-  $btn.animate({width: "90px"}, 100)
+  $btn.animate({width: "75px"}, 100)
     .promise().done(function() {
       setTimeout(() => {
-        $btn.animate({width: "105px"}, 100);
+        $btn.animate({width: "80px"}, 100);
       }, 100);
     });
 }
@@ -330,6 +355,7 @@ function multiDisplay() {
   const { $disp, medal, img } = multiHandle[gameStatus.winCount];
   $multiAll.css(BG_COLOR,COLORS.INIT_MULTI);
   $disp.css(BG_COLOR,COLORS.APPLY_MULTI);
+  console.log('medalPayment(medal)' + medal);
   medalPayment(medal);
   bgGifDisplay(img);
   if(gameStatus.winCount===5) ending();
@@ -350,17 +376,21 @@ function ending() {
 }
 
 function medalPayment(num) {
-  gameStatus.medal += num;
+  gameStatus.medal = num + getCookie();
+  console.log('gameStatus.medal' + gameStatus.medal);
+  setMedalCookie(gameStatus.medal);
   updateMedalInfo();
 }
 
 function medalConsumption() {
-  gameStatus.medal -= 1;
+  gameStatus.medal = getCookie() - 1;
+  setMedalCookie(gameStatus.medal);
   updateMedalInfo();
 }
 
 function updateMedalInfo() {
-  $medalnum.html('<h4>' + gameStatus.medal + '</h4>');
+const medalnow = getMedalFromCookie();
+  $medalnum.html('<h4>' + medalnow + '</h4>');
 }
 
 function isPlayAble() {
@@ -372,8 +402,9 @@ function isPlayAble() {
   }
 }
 
-function setCookie(){
-  $.cookie(COOKIE_NAME,gameStatus.medal);
+function setCookie(medal){
+  $.cookie(COOKIE_NAME,medal);
+  console.log('COOKIE_NAME:'+ COOKIE_NAME + ' medal:' + medal);
 }
 function getCookie(){
   return Number($.cookie(COOKIE_NAME));

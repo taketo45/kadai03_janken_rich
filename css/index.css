@@ -12,12 +12,15 @@
   z-index: 1000;
   /* top: 0.5rem; */
   border-radius: 24px;
+  display: flex;
+  justify-content: space-between;
 }
 
 #headerlogo {
   width: 30vh;
   height: 10vh;
   /* background-size: cover; */
+  flex-grow: 1;
 }
 
 #headerlogo img {
@@ -26,6 +29,26 @@
   height: 10vh;
   width: 30vh;;
   object-fit: cover;
+}
+
+.headerright {
+  flex-grow: 1;
+  display: flex;
+  justify-content:space-around;
+  line-height: 60px;
+}
+
+.midleDisplay {
+  display: flex;
+  justify-content:space-around;
+}
+
+.medal {
+  font-size: 18px;
+}
+
+.medalnum {
+  font-size: 24px;
 }
 
 main {

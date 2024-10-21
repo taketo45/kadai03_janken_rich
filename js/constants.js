@@ -39,7 +39,8 @@ const gameStatus = {
   isGaming: false,
   audio: null,
   isSoundOK: true,
-  cookieName: '01_guy_dagashi_games_company'
+  cookieName: '01_guy_dagashi_games_byhands',
+  cookieLongSpanName: '01_guy_dagashi_games_bybank',
 }
 
 const BACKGROUNDS = {
