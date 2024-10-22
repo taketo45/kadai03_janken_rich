@@ -33,6 +33,7 @@ const $medalnum = $("#medalnum");
 const $longmedalnum = $("#longmedalnum");
 const $tenYenInsert = $("#tenYenInsert");
 const $hundredYenInsert = $("#hundredYenInsert");
+const $medalClear = $("#medalClear");
 const $medalSet = $("#medalSet");
 const $medalGet = $("#medalGet");
 
@@ -60,17 +61,23 @@ function attachEnevntListners(){
   });
   $medalSet.on("click", ()=> {
     animateBtn($medalSet);
-    setMedalCookie(gameStatus.cookieLongSpanName,getMedalFromCookie(gameStatus.cookieName));
+    setMedalCookie(gameStatus.cookieLongSpanName,getMedalFromCookie(gameStatus.cookieName)||0);
     deleteGookie(gameStatus.cookieName);
     updateMedal();
   });
   $medalGet.on("click", ()=> {
     animateBtn($medalGet);
-    setMedalCookie(gameStatus.cookieName,getMedalFromCookie(gameStatus.cookieLongSpanName));
+    setMedalCookie(gameStatus.cookieName,getMedalFromCookie(gameStatus.cookieLongSpanName)||0);
     deleteGookie(gameStatus.cookieLongSpanName);
     updateMedal();
   });
-
+  $medalClear.on("click", ()=> {
+    animateBtn($medalClear);
+    // setMedalCookie(gameStatus.cookieName,getMedalFromCookie(gameStatus.cookieLongSpanName));
+    deleteGookie(gameStatus.cookieName);
+    deleteGookie(gameStatus.cookieLongSpanName);
+    updateMedal();
+  });
   // $document.keydown(handleKeyPress);
 }
 
@@ -118,13 +125,13 @@ function getMedalFromCookie(cookiename){
 
   const cookieResult = getCookie(cookiename);
   console.log(`getMedalFromCookie内のgetCookie(${cookieResult})`);
-  gameStatus.medal = cookieResult||0;
+  gameStatus.medal = cookieResult;
   console.log(`getMedalFromCookie内のgameStatus.medal(${gameStatus.medal})`);
   return gameStatus.medal;
 }
 
 function getCookie(cookiename){
-  return Number($.cookie(cookiename));
+  return Number($.cookie(cookiename))||0;
 }
 
 function deleteGookie(cookiename){

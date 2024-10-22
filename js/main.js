@@ -21,7 +21,7 @@ const MESSAGES = {
   WIN: '<h2>かち</h2>',
   LOSE: '<h2>まけ</h2>',
   CLEAR: '<h2></h2>',
-  BUY_MEDAL: "10円か100円を投入してください",
+  BUY_MEDAL: "メダルを玄関で交換してから遊んでください",
 }
 
 const SOUNDS = {
